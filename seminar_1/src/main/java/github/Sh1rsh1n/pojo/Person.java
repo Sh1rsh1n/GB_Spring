@@ -1,43 +1,36 @@
 package github.Sh1rsh1n.pojo;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import java.util.List;
+
 public class Person {
 
+    @Expose()
     private String firstName;
+    @Expose()
     private String lastName;
+    @Expose()
     private int age;
+    @Expose(serialize = false)
+    private Address address;
+    @Expose(serialize = false)
+    private String email;
+    @SerializedName("phones number")
+    @Expose(serialize = false)
+    private List<String> phones;
 
-    public Person(String firstName, String lastName, int age) {
+    public Person(String firstName, String lastName, int age, Address address, String email, List<String> phones) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
+        this.address = address;
+        this.email = email;
+        this.phones = phones;
     }
 
     @Override
@@ -48,12 +41,12 @@ public class Person {
 
         Person person = (Person) o;
 
-        return new EqualsBuilder().append(age, person.age).append(firstName, person.firstName).append(lastName, person.lastName).isEquals();
+        return new EqualsBuilder().append(age, person.age).append(firstName, person.firstName).append(lastName, person.lastName).append(address, person.address).append(email, person.email).append(phones, person.phones).isEquals();
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder(17, 37).append(firstName).append(lastName).append(age).toHashCode();
+        return new HashCodeBuilder(17, 37).append(firstName).append(lastName).append(age).append(address).append(email).append(phones).toHashCode();
     }
 
     @Override
@@ -62,6 +55,9 @@ public class Person {
                 .append("firstName", firstName)
                 .append("lastName", lastName)
                 .append("age", age)
+                .append("address", address)
+                .append("email", email)
+                .append("phones", phones)
                 .toString();
     }
 }
