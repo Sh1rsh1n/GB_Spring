@@ -31,11 +31,13 @@ public class UserRepository {
     }
 
     public User save(User user) {
-        String sql = "INSERT INTO userTable VALUES (NULL, ?, ?)";
+        String sql = "INSERT INTO userTable (firstName, lastName) VALUES (?, ?)";
         jdbc.update(sql, user.getFirstName(), user.getLastName());
-        return  user;
+        return user;
     }
 
-    public void deleteById(int id){}
-    //"DELETE FROM userTable WHERE id=?"
+    public void deleteById(int id) {
+        String deleteSql = "DELETE FROM userTable WHERE id=?";
+        jdbc.update(deleteSql, id);
+    }
 }

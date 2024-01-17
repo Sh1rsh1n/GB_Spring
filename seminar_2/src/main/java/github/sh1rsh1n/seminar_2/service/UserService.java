@@ -1,8 +1,7 @@
 package github.sh1rsh1n.seminar_2.service;
 
 import github.sh1rsh1n.seminar_2.model.User;
-import github.sh1rsh1n.seminar_2.repository;
-import org.springframework.beans.factory.annotation.Autowired;
+import github.sh1rsh1n.seminar_2.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,8 +19,8 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public User saveUser(User user){
-        return userRepository.save(user);
+    public void saveUser(User user){
+        userRepository.save(user);
     }
 
     public void deleteById(int id) {
