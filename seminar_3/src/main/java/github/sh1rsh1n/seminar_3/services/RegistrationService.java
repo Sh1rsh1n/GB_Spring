@@ -8,7 +8,7 @@ import github.sh1rsh1n.seminar_3.domain.User;
 public class RegistrationService {
     
     private UserService<User> userService;
-
+    
     public RegistrationService(UserService<User> userService) {
         this.userService = userService;
     }
@@ -19,6 +19,10 @@ public class RegistrationService {
         user.setAge(age);
         user.setEmail(email);
 
-        userService.save(user);
+        if (userService.save(user)) {
+            NotificationService.notifyUser(user);
+            return;
+        }
+        NotificationService.sendNotification("Incorrect value. Try again late.");
     }
 }
