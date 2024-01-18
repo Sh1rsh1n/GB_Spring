@@ -1,21 +1,21 @@
 package github.sh1rsh1n.seminar_3.services;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import github.sh1rsh1n.seminar_3.domain.User;
-import github.sh1rsh1n.seminar_3.repositorys.UserRepository;
+import github.sh1rsh1n.seminar_3.repositorys.Repository;
 
 @Service
 public class DataProcessingService {
-    
-    
-    private final UserRepository<User> repository;
 
-    public DataProcessingService(UserRepository<User> repository) {
+    private final Repository<User, Integer> repository;
+
+    public DataProcessingService(Repository<User, Integer> repository) {
         this.repository = repository;
     }
 

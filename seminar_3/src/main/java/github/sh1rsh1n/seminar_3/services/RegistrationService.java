@@ -1,8 +1,7 @@
 package github.sh1rsh1n.seminar_3.services;
 
-import org.springframework.stereotype.Service;
-
 import github.sh1rsh1n.seminar_3.domain.User;
+import org.springframework.stereotype.Service;
 
 @Service
 public class RegistrationService {

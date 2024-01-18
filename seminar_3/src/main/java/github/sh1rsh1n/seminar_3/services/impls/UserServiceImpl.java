@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import github.sh1rsh1n.seminar_3.domain.User;
-import github.sh1rsh1n.seminar_3.repositorys.UserRepository;
+import github.sh1rsh1n.seminar_3.repositorys.Repository;
 import github.sh1rsh1n.seminar_3.services.UserService;
 
 /**
@@ -14,9 +14,9 @@ import github.sh1rsh1n.seminar_3.services.UserService;
 @Service
 public class UserServiceImpl implements UserService<User> {
 
-    private UserRepository<User, Integer> repository;
+    private Repository<User, Integer> repository;
 
-    public UserServiceImpl(UserRepository<User, Integer> repository) {
+    public UserServiceImpl(Repository<User, Integer> repository) {
         this.repository = repository;
     }
 

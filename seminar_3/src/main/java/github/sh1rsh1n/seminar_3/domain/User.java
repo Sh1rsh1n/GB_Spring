@@ -5,12 +5,9 @@ package github.sh1rsh1n.seminar_3.domain;
  */
 public class User {
 
-    private Integer id;
-
+    private int id;
     private String name;
-
     private int age;
-
     private String email;
 
     public User(String name, int age, String email) {

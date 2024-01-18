@@ -3,25 +3,27 @@ package github.sh1rsh1n.seminar_3.repositorys.impls;
 import java.util.List;
 import java.util.Optional;
 
+import github.sh1rsh1n.seminar_3.repositorys.Repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.stereotype.Repository;
 
 import github.sh1rsh1n.seminar_3.domain.User;
-import github.sh1rsh1n.seminar_3.repositorys.UserRepository;
+import org.springframework.stereotype.Component;
 
 /**
  * Класс реализация обращения к БД
  */
-@Repository
-public class UserRepositoryImpl implements UserRepository<User, Integer> {
+@Component
+public class UserRepositoryImpl implements Repository<User, Integer> {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
+
     /**
      * Получаем пользователя по ID
      * возвращаем Optional<User>, так как пользователя с указанным ID может не быть в БД
+     *
      * @param Integer - id пользователя
      * @return Optional<User>
      */
@@ -33,7 +35,7 @@ public class UserRepositoryImpl implements UserRepository<User, Integer> {
 
     /**
      * получаем список всех пользователей
-     * 
+     *
      * @return Lisr<User>
      */
     @Override
@@ -81,7 +83,6 @@ public class UserRepositoryImpl implements UserRepository<User, Integer> {
      */
     private final RowMapper<User> mapper = (r, i) -> {
         User user = new User();
-        user.setId(r.getInt("id"));
         user.setName(r.getString("name"));
         user.setAge(r.getInt("age"));
         user.setEmail(r.getString("email"));
