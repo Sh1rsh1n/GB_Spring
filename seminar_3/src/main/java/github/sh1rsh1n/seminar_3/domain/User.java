@@ -1,31 +1,16 @@
 package github.sh1rsh1n.seminar_3.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-
 /**
  * Класс, описание пользователя
- * Имеет аннотации Entity и Table, для представления в БД
  */
-@Entity
-@Table(name = "users")
 public class User {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @Column(name = "name")
     private String name;
 
-    @Column(name = "age")
     private int age;
 
-    @Column(name = "email")
     private String email;
 
     public User(String name, int age, String email) {
@@ -72,11 +57,10 @@ public class User {
     @Override
     public String toString() {
         return "{" +
-            " id='" + getId() + "'" +
-            ", name='" + getName() + "'" +
-            ", age='" + getAge() + "'" +
-            ", email='" + getEmail() + "'" +
-            "}";
+                " id='" + getId() + "'" +
+                ", name='" + getName() + "'" +
+                ", age='" + getAge() + "'" +
+                ", email='" + getEmail() + "'" +
+                "}";
     }
-
 }

@@ -1,20 +1,14 @@
 package github.sh1rsh1n.seminar_3.services;
 
-import org.springframework.stereotype.Service;
+import java.util.List;
 
-import github.sh1rsh1n.seminar_3.repositorys.UserRepository;
+public interface UserService<E> {
+    
+    E getById(Integer id);
 
-/**
- * Класс, взаимодествие с пользовательскими данными
- */
-@Service
-public class UserService {
+    List<E> getAll();
 
-    private final UserRepository repository;
+    boolean save(E e);
 
-    public UserService(UserRepository repository) {
-        this.repository = repository;
-    }
-
-
+    boolean delete(E e);
 }

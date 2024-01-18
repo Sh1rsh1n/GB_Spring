@@ -3,10 +3,10 @@ package github.sh1rsh1n.seminar_3.repositorys.impls;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import github.sh1rsh1n.seminar_3.domain.User;
 import github.sh1rsh1n.seminar_3.repositorys.UserRepository;
@@ -14,11 +14,11 @@ import github.sh1rsh1n.seminar_3.repositorys.UserRepository;
 /**
  * Класс реализация обращения к БД
  */
-@Component
+@Repository
 public class UserRepositoryImpl implements UserRepository<User, Integer> {
 
+    @Autowired
     private JdbcTemplate jdbcTemplate;
-
     /**
      * Получаем пользователя по ID
      * возвращаем Optional<User>, так как пользователя с указанным ID может не быть в БД
@@ -27,7 +27,7 @@ public class UserRepositoryImpl implements UserRepository<User, Integer> {
      */
     @Override
     public Optional<User> findById(Integer id) {
-        String query = "SELECT u.id, u.name, u.age, u.email FROM users u WHERE id=?";
+        String query = "select * from users WHERE id=?";
         return Optional.of(jdbcTemplate.queryForObject(query, mapper, id));
     }
 
@@ -38,7 +38,7 @@ public class UserRepositoryImpl implements UserRepository<User, Integer> {
      */
     @Override
     public List<User> findAll() {
-        String query = "SELECT u.id, u.name, u.age, u.email FROM users u";
+        String query = "select * from users";
         return jdbcTemplate.query(query, mapper);
     }
 
@@ -69,16 +69,11 @@ public class UserRepositoryImpl implements UserRepository<User, Integer> {
 
     /**
      * Удаление пользователя из БД
-     * перед удалением выполняем проверку, существует ли пользователь в БД
      */
     @Override
     public void delete(User user) {
         String deleteQuery = "DELETE FROM users WHERE id=?";
-        int userId = user.getId();
-
-        if (findById(userId).isPresent()) {
-            jdbcTemplate.update(deleteQuery, userId);
-        }
+        jdbcTemplate.update(deleteQuery);
     }
 
     /**
