@@ -1,13 +1,12 @@
-package github.sh1rsh1n.sem3.services.impls;
+package github.sh1rsh1n.seminar_3.services.impls;
 
 
-import github.sh1rsh1n.sem3.domain.User;
-import github.sh1rsh1n.sem3.repositorys.Repository;
-import github.sh1rsh1n.sem3.services.UserService;
+import github.sh1rsh1n.seminar_3.domain.User;
+import github.sh1rsh1n.seminar_3.repositorys.Repository;
+import github.sh1rsh1n.seminar_3.services.UserService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
 
 /**
  * Класс, взаимодествие и обработка пользовательских данных
@@ -15,7 +14,7 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService<User> {
 
-    private Repository<User, Long> repository;
+    private final Repository<User, Long> repository;
 
     public UserServiceImpl(Repository<User, Long> repository) {
         this.repository = repository;

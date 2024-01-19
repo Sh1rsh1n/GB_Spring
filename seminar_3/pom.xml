@@ -11,8 +11,8 @@
     <groupId>github.sh1rsh1n</groupId>
     <artifactId>seminar_3</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>sem3</name>
-    <description>sem3</description>
+    <name>seminar_3</name>
+    <description>seminar_3</description>
     <properties>
         <java.version>17</java.version>
     </properties>

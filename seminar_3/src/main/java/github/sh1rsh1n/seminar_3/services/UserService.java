@@ -1,4 +1,4 @@
-package github.sh1rsh1n.sem3.services;
+package github.sh1rsh1n.seminar_3.services;
 
 import java.util.List;
 

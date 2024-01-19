@@ -1,10 +1,10 @@
-package github.sh1rsh1n.sem3;
+package github.sh1rsh1n.seminar_3;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class Sem3ApplicationTests {
+class Seminar3ApplicationTests {
 
     @Test
     void contextLoads() {

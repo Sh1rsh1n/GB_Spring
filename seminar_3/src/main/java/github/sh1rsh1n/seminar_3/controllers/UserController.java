@@ -1,9 +1,9 @@
-package github.sh1rsh1n.sem3.controllers;
+package github.sh1rsh1n.seminar_3.controllers;
 
 
-import github.sh1rsh1n.sem3.domain.User;
-import github.sh1rsh1n.sem3.services.RegistrationService;
-import github.sh1rsh1n.sem3.services.UserService;
+import github.sh1rsh1n.seminar_3.domain.User;
+import github.sh1rsh1n.seminar_3.services.RegistrationService;
+import github.sh1rsh1n.seminar_3.services.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

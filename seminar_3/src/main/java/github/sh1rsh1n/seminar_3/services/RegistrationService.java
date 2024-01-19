@@ -1,7 +1,8 @@
-package github.sh1rsh1n.sem3.services;
+package github.sh1rsh1n.seminar_3.services;
 
 
-import github.sh1rsh1n.sem3.domain.User;
+
+import github.sh1rsh1n.seminar_3.domain.User;
 import org.springframework.stereotype.Service;
 
 /**

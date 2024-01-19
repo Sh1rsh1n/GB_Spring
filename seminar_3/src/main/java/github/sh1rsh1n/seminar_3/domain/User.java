@@ -1,4 +1,4 @@
-package github.sh1rsh1n.sem3.domain;
+package github.sh1rsh1n.seminar_3.domain;
 
 /**
  * Класс, описание пользователя

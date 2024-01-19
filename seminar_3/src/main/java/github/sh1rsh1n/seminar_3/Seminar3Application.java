@@ -1,13 +1,13 @@
-package github.sh1rsh1n.sem3;
+package github.sh1rsh1n.seminar_3;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Sem3Application {
+public class Seminar3Application {
 
     public static void main(String[] args) {
-        SpringApplication.run(Sem3Application.class, args);
+        SpringApplication.run(Seminar3Application.class, args);
     }
 
 }

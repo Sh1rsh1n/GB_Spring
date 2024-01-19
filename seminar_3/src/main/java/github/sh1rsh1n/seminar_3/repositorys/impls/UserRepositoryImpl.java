@@ -1,15 +1,13 @@
-package github.sh1rsh1n.sem3.repositorys.impls;
+package github.sh1rsh1n.seminar_3.repositorys.impls;
 
 
-import github.sh1rsh1n.sem3.domain.User;
-import github.sh1rsh1n.sem3.repositorys.Repository;
+import github.sh1rsh1n.seminar_3.domain.User;
+import github.sh1rsh1n.seminar_3.repositorys.Repository;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
-import java.sql.ResultSet;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Класс реализация обращения к БД
