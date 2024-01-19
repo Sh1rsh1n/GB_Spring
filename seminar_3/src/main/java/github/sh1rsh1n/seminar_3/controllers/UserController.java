@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 import github.sh1rsh1n.seminar_3.domain.User;
 import github.sh1rsh1n.seminar_3.services.UserService;
 
+/**
+ * Контроллер, обрабатывает запросы по адресу http://localhost:8080/user
+ */
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -27,6 +30,10 @@ public class UserController {
         this.registrationService = registrationService;
     }
 
+    /**
+     * метод, обрабатывает запросы по адресу http://localhost:8080/user
+     * @return ResponseEntity, список пользователей в формате JSON
+     */
     @GetMapping
     public ResponseEntity<?> getAllUsers() {
         List<User> users = new ArrayList<>();
@@ -38,8 +45,13 @@ public class UserController {
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
+    /**
+     * метод, обрабатывает запросы по адресу http://localhost:8080/user/body
+     * @param user данные которые передаем в теле запроса, для добавления в БД
+     * @return ResponseEntity, данные о пользователи в формате JSON
+     */
     @PostMapping("/body")
-    public ResponseEntity<?> addUser(@RequestBody User user) {
+    public ResponseEntity<?> userAddFromParam(@RequestBody User user) {
         if (user != null) {
             registrationService.processRegistration(user.getName(), user.getAge(), user.getEmail());
             return new ResponseEntity<>(user, HttpStatus.CREATED);

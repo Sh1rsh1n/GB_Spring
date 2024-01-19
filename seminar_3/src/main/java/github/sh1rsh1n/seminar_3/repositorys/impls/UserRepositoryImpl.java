@@ -23,7 +23,6 @@ public class UserRepositoryImpl implements Repository<User, Integer> {
     /**
      * Получаем пользователя по ID
      * возвращаем Optional<User>, так как пользователя с указанным ID может не быть в БД
-     *
      * @param Integer - id пользователя
      * @return Optional<User>
      */
@@ -35,7 +34,6 @@ public class UserRepositoryImpl implements Repository<User, Integer> {
 
     /**
      * получаем список всех пользователей
-     *
      * @return Lisr<User>
      */
     @Override
@@ -83,6 +81,7 @@ public class UserRepositoryImpl implements Repository<User, Integer> {
      */
     private final RowMapper<User> mapper = (r, i) -> {
         User user = new User();
+        user.setId(r.getInt("id"));
         user.setName(r.getString("name"));
         user.setAge(r.getInt("age"));
         user.setEmail(r.getString("email"));

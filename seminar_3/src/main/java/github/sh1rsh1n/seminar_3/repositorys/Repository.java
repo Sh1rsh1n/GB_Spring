@@ -1,7 +1,5 @@
 package github.sh1rsh1n.seminar_3.repositorys;
 
-import github.sh1rsh1n.seminar_3.domain.User;
-
 import java.util.List;
 import java.util.Optional;
 
