@@ -1,39 +1,55 @@
-package github.sh1rsh1n.seminar_3.repositorys.impls;
+package github.sh1rsh1n.sem3.repositorys.impls;
 
-import java.util.List;
-import java.util.Optional;
 
-import github.sh1rsh1n.seminar_3.repositorys.Repository;
-import org.springframework.beans.factory.annotation.Autowired;
+import github.sh1rsh1n.sem3.domain.User;
+import github.sh1rsh1n.sem3.repositorys.Repository;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-
-import github.sh1rsh1n.seminar_3.domain.User;
 import org.springframework.stereotype.Component;
+
+import java.sql.ResultSet;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * Класс реализация обращения к БД
  */
 @Component
-public class UserRepositoryImpl implements Repository<User, Integer> {
+public class UserRepositoryImpl implements Repository<User, Long> {
 
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
+
+    public UserRepositoryImpl(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
     /**
      * Получаем пользователя по ID
      * возвращаем Optional<User>, так как пользователя с указанным ID может не быть в БД
+     *
      * @param Integer - id пользователя
      * @return Optional<User>
      */
     @Override
-    public Optional<User> findById(Integer id) {
-        String query = "select * from users WHERE id=?";
-        return Optional.of(jdbcTemplate.queryForObject(query, mapper, id));
+    public User findById(Long id) {
+        String query = "select u.name, u.age, u.email from users as u where id=?";
+        if (id == 0) {
+            return null;
+        }
+        return jdbcTemplate.queryForObject(query, new Object[]{id}, (rs, rowNum) -> {
+            User user = new User();
+            user.setId(rs.getLong("id"));
+            user.setName(rs.getString("name"));
+            user.setAge(rs.getInt("age"));
+            user.setEmail(rs.getString("email"));
+            return user;
+        });
     }
+
 
     /**
      * получаем список всех пользователей
+     *
      * @return Lisr<User>
      */
     @Override
@@ -51,7 +67,7 @@ public class UserRepositoryImpl implements Repository<User, Integer> {
     public void save(User user) {
         String createQuery = "INSERT INTO users (name, age, email) VALUES (?, ?, ?)";
         String updateQuery = "UPDATE users SET name=?, age=?, email=? WHERE id=?";
-        if (findById(user.getId()).isPresent()) {
+        if (findById(user.getId()) != null) {
             jdbcTemplate.update(
                     updateQuery,
                     user.getName(),
@@ -81,7 +97,7 @@ public class UserRepositoryImpl implements Repository<User, Integer> {
      */
     private final RowMapper<User> mapper = (r, i) -> {
         User user = new User();
-        user.setId(r.getInt("id"));
+        user.setId(r.getLong("id"));
         user.setName(r.getString("name"));
         user.setAge(r.getInt("age"));
         user.setEmail(r.getString("email"));

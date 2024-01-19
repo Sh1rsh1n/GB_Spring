@@ -1,19 +1,16 @@
-package github.sh1rsh1n.seminar_3.controllers;
+package github.sh1rsh1n.sem3.controllers;
+
+
+import github.sh1rsh1n.sem3.domain.User;
+import github.sh1rsh1n.sem3.services.RegistrationService;
+import github.sh1rsh1n.sem3.services.UserService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import github.sh1rsh1n.seminar_3.services.RegistrationService;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import github.sh1rsh1n.seminar_3.domain.User;
-import github.sh1rsh1n.seminar_3.services.UserService;
+import java.util.Map;
 
 /**
  * Контроллер, обрабатывает запросы по адресу http://localhost:8080/user
@@ -32,6 +29,7 @@ public class UserController {
 
     /**
      * метод, обрабатывает запросы по адресу http://localhost:8080/user
+     *
      * @return ResponseEntity, список пользователей в формате JSON
      */
     @GetMapping
@@ -47,15 +45,22 @@ public class UserController {
 
     /**
      * метод, обрабатывает запросы по адресу http://localhost:8080/user/body
+     *
      * @param user данные которые передаем в теле запроса, для добавления в БД
      * @return ResponseEntity, данные о пользователи в формате JSON
      */
     @PostMapping("/body")
-    public ResponseEntity<?> userAddFromParam(@RequestBody User user) {
-        if (user != null) {
-            registrationService.processRegistration(user.getName(), user.getAge(), user.getEmail());
-            return new ResponseEntity<>(user, HttpStatus.CREATED);
+    public ResponseEntity<User> userAddFromParam(@RequestBody Map<String, String> requestObject) {
+
+        if (requestObject != null) {
+            String name = requestObject.get("name");
+            int age = Integer.parseInt(requestObject.get("age"));
+            String email = requestObject.get("email");
+
+            registrationService.processRegistration(name, age, email);
+            return new ResponseEntity<>(HttpStatus.CREATED);
         }
+
         return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

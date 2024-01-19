@@ -1,13 +1,13 @@
-package github.sh1rsh1n.seminar_3.services;
+package github.sh1rsh1n.sem3.services;
+
+
+import github.sh1rsh1n.sem3.domain.User;
+import github.sh1rsh1n.sem3.repositorys.Repository;
+import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import org.springframework.stereotype.Service;
-
-import github.sh1rsh1n.seminar_3.domain.User;
-import github.sh1rsh1n.seminar_3.repositorys.Repository;
 
 /**
  * класс, обработка данных полученных из БД
@@ -15,9 +15,9 @@ import github.sh1rsh1n.seminar_3.repositorys.Repository;
 @Service
 public class DataProcessingService {
 
-    private final Repository<User, Integer> repository;
+    private final Repository<User, Long> repository;
 
-    public DataProcessingService(Repository<User, Integer> repository) {
+    public DataProcessingService(Repository<User, Long> repository) {
         this.repository = repository;
     }
 

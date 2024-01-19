@@ -1,12 +1,13 @@
-package github.sh1rsh1n.seminar_3.services.impls;
+package github.sh1rsh1n.sem3.services.impls;
+
+
+import github.sh1rsh1n.sem3.domain.User;
+import github.sh1rsh1n.sem3.repositorys.Repository;
+import github.sh1rsh1n.sem3.services.UserService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import org.springframework.stereotype.Service;
-
-import github.sh1rsh1n.seminar_3.domain.User;
-import github.sh1rsh1n.seminar_3.repositorys.Repository;
-import github.sh1rsh1n.seminar_3.services.UserService;
 
 /**
  * Класс, взаимодествие и обработка пользовательских данных
@@ -14,21 +15,22 @@ import github.sh1rsh1n.seminar_3.services.UserService;
 @Service
 public class UserServiceImpl implements UserService<User> {
 
-    private Repository<User, Integer> repository;
+    private Repository<User, Long> repository;
 
-    public UserServiceImpl(Repository<User, Integer> repository) {
+    public UserServiceImpl(Repository<User, Long> repository) {
         this.repository = repository;
     }
 
     /**
      * Удаление пользователя
      * Перед удалением, выполняется проверка существования пользователя в БД
+     *
      * @param User пользователь которого удаляем
      * @reurn boolean
      */
     @Override
     public boolean delete(User user) {
-        if (repository.findById(user.getId()).isPresent()) {
+        if (repository.findById(user.getId()) != null) {
             repository.delete(user);
             return true;
         }
@@ -37,20 +39,22 @@ public class UserServiceImpl implements UserService<User> {
 
     /**
      * Получение списка всех полльзователей
+     *
      * @return List<User> список пользователей
      */
     @Override
     public List<User> getAll() {
-        return repository.findAll();        
+        return repository.findAll();
     }
 
     /**
      * Получение пользователя по ID
+     *
      * @return User пользователь
      */
     @Override
-    public User getById(Integer id) {
-        return repository.findById(id).orElse(null);
+    public User getById(Long id) {
+        return repository.findById(id);
     }
 
     /**
@@ -66,5 +70,5 @@ public class UserServiceImpl implements UserService<User> {
         return false;
     }
 
-    
+
 }

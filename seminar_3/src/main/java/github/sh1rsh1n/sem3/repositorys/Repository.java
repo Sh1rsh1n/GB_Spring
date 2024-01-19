@@ -1,4 +1,4 @@
-package github.sh1rsh1n.seminar_3.repositorys;
+package github.sh1rsh1n.sem3.repositorys;
 
 import java.util.List;
 import java.util.Optional;
@@ -9,7 +9,7 @@ import java.util.Optional;
  */
 public interface Repository<E, Id> {
 
-    Optional<E> findById(Id id);
+    E findById(Id id);
 
     List<E> findAll();
 

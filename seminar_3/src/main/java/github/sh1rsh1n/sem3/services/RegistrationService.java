@@ -1,6 +1,7 @@
-package github.sh1rsh1n.seminar_3.services;
+package github.sh1rsh1n.sem3.services;
 
-import github.sh1rsh1n.seminar_3.domain.User;
+
+import github.sh1rsh1n.sem3.domain.User;
 import org.springframework.stereotype.Service;
 
 /**
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class RegistrationService {
     
-    private UserService<User> userService;
+    private final UserService<User> userService;
     
     public RegistrationService(UserService<User> userService) {
         this.userService = userService;
@@ -22,11 +23,8 @@ public class RegistrationService {
      * @param email электронная почта
      */
     public void processRegistration(String name, int age, String email) {
-        User user = new User();
-        user.setId(0);
-        user.setName(name);
-        user.setAge(age);
-        user.setEmail(email);
+
+        User user = new User(name, age, email);
 
         // если пользователь успешно создан, выводим оповещение в консоль
         if (userService.save(user)) {

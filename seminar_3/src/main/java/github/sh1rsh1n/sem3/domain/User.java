@@ -1,11 +1,11 @@
-package github.sh1rsh1n.seminar_3.domain;
+package github.sh1rsh1n.sem3.domain;
 
 /**
  * Класс, описание пользователя
  */
 public class User {
 
-    private int id;
+    private long id;
     private String name;
     private int age;
     private String email;
@@ -16,14 +16,11 @@ public class User {
         this.email = email;
     }
 
-    public User() {
+    public long getId() {
+        return id;
     }
 
-    public Integer getId() {
-        return this.id;
-    }
-
-    public void setId(Integer id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -51,13 +48,8 @@ public class User {
         this.email = email;
     }
 
-    @Override
-    public String toString() {
-        return "{" +
-                " id='" + getId() + "'" +
-                ", name='" + getName() + "'" +
-                ", age='" + getAge() + "'" +
-                ", email='" + getEmail() + "'" +
-                "}";
+    public User() {
+
+
     }
 }
