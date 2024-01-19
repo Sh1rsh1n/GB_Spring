@@ -31,7 +31,7 @@ public class UserRepositoryImpl implements Repository<User, Long> {
     @Override
     public User findById(Long id) {
         String query = "select u.name, u.age, u.email from users as u where id=?";
-        if (id == 0) {
+        if (id <= 0) {
             return null;
         }
         return jdbcTemplate.queryForObject(query, new Object[]{id}, (rs, rowNum) -> {

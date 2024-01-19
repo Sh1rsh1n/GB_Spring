@@ -50,12 +50,12 @@ public class UserController {
      * @return ResponseEntity, данные о пользователи в формате JSON
      */
     @PostMapping("/body")
-    public ResponseEntity<User> userAddFromParam(@RequestBody Map<String, String> requestObject) {
+    public ResponseEntity<?> userAddFromParam(@RequestBody User user) {
 
-        if (requestObject != null) {
-            String name = requestObject.get("name");
-            int age = Integer.parseInt(requestObject.get("age"));
-            String email = requestObject.get("email");
+        if (user != null) {
+            String name = user.getName();
+            int age = user.getAge();
+            String email = user.getEmail();
 
             registrationService.processRegistration(name, age, email);
             return new ResponseEntity<>(HttpStatus.CREATED);

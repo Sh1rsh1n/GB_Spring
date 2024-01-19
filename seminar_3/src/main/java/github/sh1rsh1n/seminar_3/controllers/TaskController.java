@@ -26,11 +26,12 @@ public class TaskController {
     }
 
     /**
-     * метод, обрабатывает запросы по адресу http://localhost:8080/task/{age}
+     * метод, обрабатывает запросы по адресу http://localhost:8080/task/filter/{age}
+     *
      * @param age параметр запроса(минимальный возраст пользователя)
      * @return ResponseEntity: ответ сервера, список пользователей в JSON формате
      */
-    @GetMapping("/{age}")
+    @GetMapping("/filter/{age}")
     public ResponseEntity<?> filterUsersByAge(@PathVariable("age") int age) {
 
         List<User> filteringUsers = data.filterUsersByAge(age);
@@ -42,6 +43,7 @@ public class TaskController {
 
     /**
      * метод, обрабатывает запросы по адресу http://localhost:8080/task/calc
+     *
      * @return ResponseEntity, результат вычислений среднего возраста всех пользователей
      */
     @GetMapping("/calc")
@@ -55,10 +57,11 @@ public class TaskController {
 
     /**
      * метод, обрабатывает запросы по адресу http://localhost:8080/task/sort
+     *
      * @return ResponseEntity, отсортированный список пользователей в формате JSON
      */
     @GetMapping("/sort")
-    public ResponseEntity<?> sortByUserAge(){
+    public ResponseEntity<?> sortByUserAge() {
         List<User> sortList = data.sortUsersByAge();
 
         if (sortList.isEmpty()) {
