@@ -5,6 +5,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
+/**
+ * Конфигурация запросов к БД из properties-файла
+ */
 @Getter
 @Component
 @PropertySource("classpath:query.properties")

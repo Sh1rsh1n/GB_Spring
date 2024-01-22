@@ -9,6 +9,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Реализация обращений к БД
+ */
 @Repository
 public class UserRepositoryImpl implements UserRepository {
 
@@ -20,6 +23,11 @@ public class UserRepositoryImpl implements UserRepository {
         this.queryConfig = queryConfig;
     }
 
+    /**
+     * Получение пользователя по ID
+     * @param id - идентификатор пользователя
+     * @return Optional<User>
+     */
     @Override
     public Optional<User> findById(Integer id) {
         if (id <= 0) {
@@ -28,11 +36,19 @@ public class UserRepositoryImpl implements UserRepository {
         return Optional.ofNullable(jdbcTemplate.queryForObject(queryConfig.getGetById(), mapper, id));
     }
 
+    /**
+     * Получение списка пользователей из БД
+     * @return List<User>
+     */
     @Override
     public List<User> findAll() {
         return jdbcTemplate.query(queryConfig.getGetAll(), mapper);
     }
 
+    /**
+     * Сохранение нового и изменение существующего пользователя в БД
+     * @param user - пользователь
+     */
     @Override
     public void save(User user) {
         if (findById(user.getId()).isPresent()) {
@@ -51,16 +67,28 @@ public class UserRepositoryImpl implements UserRepository {
         }
     }
 
+    /**
+     * Удаление пользователя по ID
+     * @param id - идентификатор пользователя
+     */
     @Override
     public void deleteById(Integer id) {
         jdbcTemplate.update(queryConfig.getDelete(), id);
     }
 
+    /**
+     * Получение пользователя по имени
+     * @param name - имя пользователя
+     * @return Optional<User>
+     */
     @Override
     public Optional<User> findByName(String name) {
         return Optional.ofNullable(jdbcTemplate.queryForObject(queryConfig.getGetById(), mapper, name));
     }
 
+    /**
+     * преобразование данных о пользователе из БД в сущность
+     */
     private final RowMapper<User> mapper = (r, i) -> {
         User user = new User();
         user.setId(r.getInt("id"));

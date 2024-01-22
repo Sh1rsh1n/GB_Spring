@@ -9,7 +9,7 @@ import org.springframework.validation.annotation.Validated;
 
 /**
  * Описание сущности "пользователь"
- * и его связывание с таблицей в БД
+ * Автогенерация таблицы БД и связывание полей класса со столбцами в БД
  */
 @Data
 @NoArgsConstructor
