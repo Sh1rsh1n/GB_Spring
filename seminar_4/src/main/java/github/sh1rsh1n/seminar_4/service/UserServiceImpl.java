@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public User getUserById(Integer id) {
-        return repository.findById(id).orElseThrow(RuntimeException::new);
+        return repository.findById(id).orElse(null);
     }
 
     /**
@@ -62,7 +62,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public User getUserByName(String name) {
-        return repository.findByName(name).orElseThrow(RuntimeException::new);
+        return repository.findByName(name).orElse(null);
     }
 
     /**

@@ -18,27 +18,34 @@
 <body>
   <div th:replace="~{components/header :: header}"></div>
 
+  <div th:if="${message != null}" class="alert alert-success alert-dismissible fade show text-center message"
+  role="alert" th:text="${message}">
+  <button type="button" class="close btn-sm" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">×</span>
+  </button>
+</div>
+
   <div>
     <table class="table table-hover table-responsive-xl">
       <thead class="thead-light">
         <tr>
           <th scope="col">ID</th>
-          <th scope="col">name</th>
-          <th scope="col">age</th>
-          <th scope="col">email</th>
+          <th scope="col">имя</th>
+          <th scope="col">возраст</th>
+          <th scope="col">эл.почта</th>
         </tr>
       </thead>
       <tbody>
         <tr th:each="user : ${users}">
-          <th scope="row">${user.id}</th>
-          <td>${user.name}</td>
-          <td>${user.age}</td>
-          <td>${user.email}</td>
+          <th scope="row" th:text="${user.id}">id</th>
+          <td th:text="${user.name}">name</td>
+          <td th:text="${user.age}">age</td>
+          <td th:text="${user.email}">email</td>
           <td>
-            <a th:href="@{'/' + ${user.id}}" title="edit user" class="fa-regular fa-pen-to-square icon-dark"></a>
+            <a th:href="@{'/' + ${user.id}}" title="edit">ИЗМЕНИТЬ</a>
 
-            <a th:href="@{'/delete/' + ${user.id}}" th:userName="${tutorial.name}" id="btnDelete"
-              title="delete this user" class="fa-regular fa-trash-can icon-dark btn-delete"></a>
+            <a th:href="@{'/delete/' + ${user.id}}" th:userName="${user.name}" id="btnDelete"
+              title="delete">УДАЛИТЬ</a>
           </td>
         </tr>
       </tbody>

@@ -15,6 +15,46 @@
 <body>
   <div th:replace="~{components/header :: header}"></div>
 
+  <h2 class="text-center" th="${pageTitle}"></h2>
+
+  <div class="my-3">
+    <form th:action="@{/save}" method="post" enctype="multipart/form-data" th:object="${user}"
+      style="max-width: 550px; margin: 0 auto">
+
+      <input type="hidden" th:field="*{id}" />
+
+      <div class="p-3">
+        <div class="form-group row">
+          <label class="col-sm-3 col-form-label" for="title">Имя</label>
+          <div class="col-sm-9">
+            <input type="text" th:field="*{name}" maxlength="128" class="form-control"
+              id="name" />
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-3 col-form-label" for="description">Возраст</label>
+          <div class="col-sm-9">
+            <input type="number" th:field="*{age}" value="" class="form-control"
+              id="age"/>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-3 col-form-label" for="level">Эл. почта</label>
+          <div class="col-sm-9">
+            <input type="text" th:field="*{email}" maxlength="200" class="form-control" id="email" />
+          </div>
+        </div>
+
+        <div class="text-center">
+          <input type="submit" value="Save" class="btn btn-primary btn-sm mr-2" />
+          <input type="button" value="Cancel" id="btnCancel" class="btn btn-secondary btn-sm" />
+        </div>
+      </div>
+    </form>
+  </div>
+
   <div th:replace="~{components/footer :: footer}"></div>
 </body>
 
