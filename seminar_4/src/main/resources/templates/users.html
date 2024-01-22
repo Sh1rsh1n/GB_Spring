@@ -44,8 +44,7 @@
           <td>
             <a th:href="@{'/' + ${user.id}}" title="edit">ИЗМЕНИТЬ</a>
 
-            <a th:href="@{'/delete/' + ${user.id}}" th:userName="${user.name}" id="btnDelete"
-              title="delete">УДАЛИТЬ</a>
+            <a th:href="@{'/delete/' + ${user.id}}" id="btnDelete" title="delete">УДАЛИТЬ</a>
           </td>
         </tr>
       </tbody>

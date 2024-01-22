@@ -8,9 +8,16 @@ import org.thymeleaf.spring6.SpringTemplateEngine;
 import org.thymeleaf.spring6.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
+/**
+ * Конфигурация для шаблонизатора ThymeLeaf
+ */
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
+    /**
+     * Настройки директории, в которой находятся шаблоны страниц
+     * @return
+     */
     @Bean
     public ClassLoaderTemplateResolver templateResolver() {
         ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
@@ -21,6 +28,10 @@ public class WebConfig implements WebMvcConfigurer {
         return templateResolver;
     }
 
+    /**
+     * Конфигурация "движка"
+     * @return
+     */
     @Bean
     public SpringTemplateEngine templateEngine() {
         SpringTemplateEngine templateEngine = new SpringTemplateEngine();
@@ -28,6 +39,10 @@ public class WebConfig implements WebMvcConfigurer {
         return templateEngine;
     }
 
+    /**
+     * Конфигурация отображения страниц
+     * @return
+     */
     @Bean
     public ViewResolver viewResolver() {
         ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();

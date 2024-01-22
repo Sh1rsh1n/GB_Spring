@@ -3,11 +3,12 @@ package github.sh1rsh1n.seminar_4.service;
 import java.util.Collections;
 import java.util.List;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import github.sh1rsh1n.seminar_4.entity.User;
-import github.sh1rsh1n.seminar_4.repository.UserReposotory;
+import github.sh1rsh1n.seminar_4.repository.UserRepository;
 
 /**
  * Реализация методов обращения к репозиторию
@@ -15,8 +16,11 @@ import github.sh1rsh1n.seminar_4.repository.UserReposotory;
 @Service
 public class UserServiceImpl implements UserService {
 
-    @Autowired
-    private UserReposotory repository;
+    private final UserRepository repository;
+
+    public UserServiceImpl(UserRepository repository) {
+        this.repository = repository;
+    }
 
     /**
      * Удаление пользователя по ID

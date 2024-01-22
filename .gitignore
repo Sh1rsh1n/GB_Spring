@@ -15,6 +15,7 @@ target/
 
 ### IntelliJ IDEA ###
 .out
+.log
 .idea
 *.iws
 *.iml

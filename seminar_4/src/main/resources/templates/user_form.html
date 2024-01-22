@@ -25,7 +25,7 @@
 
       <div class="p-3">
         <div class="form-group row">
-          <label class="col-sm-3 col-form-label" for="title">Имя</label>
+          <label class="col-sm-3 col-form-label" for="name">Имя</label>
           <div class="col-sm-9">
             <input type="text" th:field="*{name}" maxlength="128" class="form-control"
               id="name" />
@@ -33,7 +33,7 @@
         </div>
 
         <div class="form-group row">
-          <label class="col-sm-3 col-form-label" for="description">Возраст</label>
+          <label class="col-sm-3 col-form-label" for="age">Возраст</label>
           <div class="col-sm-9">
             <input type="number" th:field="*{age}" value="" class="form-control"
               id="age"/>
@@ -41,15 +41,14 @@
         </div>
 
         <div class="form-group row">
-          <label class="col-sm-3 col-form-label" for="level">Эл. почта</label>
+          <label class="col-sm-3 col-form-label" for="email">Эл. почта</label>
           <div class="col-sm-9">
             <input type="text" th:field="*{email}" maxlength="200" class="form-control" id="email" />
           </div>
         </div>
 
         <div class="text-center">
-          <input type="submit" value="Save" class="btn btn-primary btn-sm mr-2" />
-          <input type="button" value="Cancel" id="btnCancel" class="btn btn-secondary btn-sm" />
+          <input type="submit" value="СОХРАНИТЬ" class="btn btn-primary btn-sm mr-2" />
         </div>
       </div>
     </form>
