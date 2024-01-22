@@ -3,16 +3,19 @@ package github.sh1rsh1n.seminar_4.service;
 import java.util.Collections;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import github.sh1rsh1n.seminar_4.entity.User;
 import github.sh1rsh1n.seminar_4.repository.UserReposotory;
-import lombok.RequiredArgsConstructor;
 
 /**
  * Реализация методов обращения к репозиторию
  */
-@RequiredArgsConstructor
+@Service
 public class UserServiceImpl implements UserService {
 
+    @Autowired
     private UserReposotory repository;
 
     /**
