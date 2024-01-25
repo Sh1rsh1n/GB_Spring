@@ -14,7 +14,7 @@ public interface TaskService {
 
     boolean createTask(Task task);
 
-    void updateTask(Long id, Task task);
+    boolean updateTaskStatus(Long id, Status status);
 
     boolean deleteTask(Long id);
 }

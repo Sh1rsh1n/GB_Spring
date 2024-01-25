@@ -19,11 +19,19 @@ public class TaskServiceImpl implements TaskService {
 
     private final TaskRepository repository;
 
+    /**
+     * метод добавление новой задачи
+     * если task не равен null устанавливаем даты и статус,
+     * затем передаем задачу в репозиторий
+     * 
+     * @param task - задачу
+     * @return boolean
+     */
     @Override
     public boolean createTask(Task task) {
         if (task != null) {
             LocalDateTime date = LocalDateTime.now();
-
+            System.out.println(task.getDescription());
             task.setCreateAt(date);
             task.setChangesAt(date);
             task.setStatus(Status.TODO);
@@ -34,6 +42,13 @@ public class TaskServiceImpl implements TaskService {
         return false;
     }
 
+    /**
+     * Удаление задачи по ID
+     * Выполняем проверку, есть ли задача по данному ID в репозитории
+     * 
+     * @param id - идентификатор задачи
+     * @return boolean
+     */
     @Override
     public boolean deleteTask(Long id) {
         Optional<Task> task = repository.findById(id);
@@ -44,6 +59,11 @@ public class TaskServiceImpl implements TaskService {
         throw new TaskNotFoundException();
     }
 
+    /**
+     * Получение списка всех задач
+     * 
+     * @return List<Task>
+     */
     @Override
     public List<Task> getAllTask() {
         List<Task> tasks = repository.findAll();
@@ -53,29 +73,48 @@ public class TaskServiceImpl implements TaskService {
         return Collections.emptyList();
     }
 
+    /**
+     * Получение задачи по ID
+     * 
+     * @param id - идетификатор задачи
+     * @return Task
+     */
     @Override
     public Task getTaskById(Long id) {
         Optional<Task> task = repository.findById(id);
         if (task.isPresent()) {
             return task.get();
         }
-        return null;
+        throw new TaskNotFoundException();
     }
 
+    /**
+     * Получаем список задач, отфильтрованный по статусу
+     * 
+     * @param status - статус задачи
+     * @return List<Task>
+     */
     @Override
     public List<Task> getTaskByStatus(Status status) {
         return repository.findAll().stream().filter(s -> s.getStatus().equals(status)).toList();
     }
 
+    /**
+     * Обновление данных задачи по ID
+     * Если задача по данному ID есть в репозитории, то обновляем ее данные
+     * 
+     * @param id   - идентификатор задачи которую нужно изменить
+     * @param task - новые данные для изменяемой задачи
+     */
     @Override
-    public void updateTask(Long id, Task task) {
+    public boolean updateTaskStatus(Long id, Status status) {
         Optional<Task> optionalTask = repository.findById(id);
         if (optionalTask.isPresent()) {
             Task updatedTask = optionalTask.get();
-            updatedTask.setDescription(task.getDescription());
-            updatedTask.setStatus(task.getStatus());
+            updatedTask.setStatus(status);
             updatedTask.setChangesAt(LocalDateTime.now());
             repository.save(updatedTask);
+            return true;
         }
         throw new TaskNotFoundException();
     }

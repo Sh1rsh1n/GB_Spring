@@ -2,6 +2,8 @@ package github.sh1rsh1n.seminar_5.entity;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -25,6 +27,7 @@ public class Task {
     private String description;
 
     @Enumerated(value = EnumType.STRING)
+    @JsonProperty(value = "status")
     private Status status;
 
     private LocalDateTime createAt;
