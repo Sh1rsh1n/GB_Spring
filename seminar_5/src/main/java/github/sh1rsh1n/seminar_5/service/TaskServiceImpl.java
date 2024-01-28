@@ -96,7 +96,8 @@ public class TaskServiceImpl implements TaskService {
      */
     @Override
     public List<Task> getTaskByStatus(Status status) {
-        return repository.findAll().stream().filter(s -> s.getStatus().equals(status)).toList();
+        return repository.getAllTaskByStatus(status);
+        //return repository.findAll().stream().filter(s -> s.getStatus().equals(status)).toList();
     }
 
     /**

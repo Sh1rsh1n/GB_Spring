@@ -17,15 +17,19 @@ import github.sh1rsh1n.seminar_5.service.TaskService;
 import github.sh1rsh1n.seminar_5.entity.*;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * REST-контроллер обработка запросов по URI http://localhost:8080/tasks
+ */
 @RestController
-@RequestMapping("/tasks")
 @RequiredArgsConstructor
+@RequestMapping("/tasks")
 public class TaskController {
     
     private final TaskService service;
 
     /**
-     * обработка запосов по адресу http://localhost:8080/tasks
+     * Обработка GET-запосов для получения списка всех задач.
+     * Пример запроса: http://localhost:8080/tasks
      * @return ответ сервера, статус запроса и список задач
      */
     @GetMapping
@@ -37,12 +41,24 @@ public class TaskController {
         return new ResponseEntity<>(tasks, HttpStatus.OK);
     }
 
+    /**
+     * Обработка GET-запросов для получения списка задач отфильтрованных по статусу
+     * пример запроса: http://localhost:8080/tasks/DONE
+     * @param status статус задачи
+     * @return ответ сервера и список задач отфильтрованных по статусу
+     */
     @GetMapping("/{status}")
     public ResponseEntity<?> getAllTaskByStatus(@PathVariable("status") Status status) {
         List<Task> tasks = service.getTaskByStatus(status);
         return new ResponseEntity<>(tasks, HttpStatus.OK);
     }
 
+    /**
+     * Обработка POST-запроса. Создание новой задачи.
+     * пример запроса: http://localhost:8080/tasks/new?description=Buy bear
+     * @param description - описание задачи
+     * @return статус запроса и задача в формате JSON
+     */
     @PostMapping("/new")
     public ResponseEntity<?> addTask(@RequestParam String description) {
         Task task = new Task();
@@ -54,7 +70,15 @@ public class TaskController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-    @PutMapping("/{id}")
+    /**
+     * Обработка PUT-запроса. Обновление данных указанной задачи.
+     * Пример запроса: http://localhost:8080/tasks/{id}
+     * Параметры запроса: формат JSON, {"status": "DONE"}
+     * @param id - идентификатор задачи
+     * @param status - обновляемый статус
+     * @return статус запроса
+     */
+    @PutMapping("/save/{id}")
     public ResponseEntity<?> updateTaskStatus(@PathVariable Long id, @RequestBody Status[] status) {
         if (service.updateTaskStatus(id, status[0])) {
             return new ResponseEntity<>(HttpStatus.CREATED);
