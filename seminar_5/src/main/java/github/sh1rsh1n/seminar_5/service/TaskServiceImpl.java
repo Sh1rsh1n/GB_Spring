@@ -23,7 +23,6 @@ public class TaskServiceImpl implements TaskService {
      * метод добавление новой задачи
      * если task не равен null устанавливаем даты и статус,
      * затем передаем задачу в репозиторий
-     * 
      * @param task - задачу
      * @return boolean
      */
@@ -45,7 +44,6 @@ public class TaskServiceImpl implements TaskService {
     /**
      * Удаление задачи по ID
      * Выполняем проверку, есть ли задача по данному ID в репозитории
-     * 
      * @param id - идентификатор задачи
      * @return boolean
      */
@@ -61,7 +59,6 @@ public class TaskServiceImpl implements TaskService {
 
     /**
      * Получение списка всех задач
-     * 
      * @return List<Task>
      */
     @Override
@@ -75,7 +72,6 @@ public class TaskServiceImpl implements TaskService {
 
     /**
      * Получение задачи по ID
-     * 
      * @param id - идетификатор задачи
      * @return Task
      */
@@ -90,22 +86,20 @@ public class TaskServiceImpl implements TaskService {
 
     /**
      * Получаем список задач, отфильтрованный по статусу
-     * 
      * @param status - статус задачи
      * @return List<Task>
      */
     @Override
     public List<Task> getTaskByStatus(Status status) {
-        return repository.getAllTaskByStatus(status);
-        //return repository.findAll().stream().filter(s -> s.getStatus().equals(status)).toList();
+        //return repository.getAllTaskByStatus(status); 
+        return repository.findAll().stream().filter(s -> s.getStatus().equals(status)).toList();
     }
 
     /**
      * Обновление данных задачи по ID
-     * Если задача по данному ID есть в репозитории, то обновляем ее данные
-     * 
+     * Если задача по данному ID есть в репозитории, то обновляем ее данные/статус
      * @param id   - идентификатор задачи которую нужно изменить
-     * @param task - новые данные для изменяемой задачи
+     * @param status - новые данные для изменяемой задачи
      */
     @Override
     public boolean updateTaskStatus(Long id, Status status) {

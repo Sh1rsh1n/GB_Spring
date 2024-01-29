@@ -1,5 +1,6 @@
 package github.sh1rsh1n.seminar_5.entity;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -18,7 +19,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "tasks")
 @Data
 @NoArgsConstructor
-public class Task {
+public class Task implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

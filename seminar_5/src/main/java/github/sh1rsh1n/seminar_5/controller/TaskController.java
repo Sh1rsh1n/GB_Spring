@@ -50,11 +50,15 @@ public class TaskController {
     @GetMapping("/{status}")
     public ResponseEntity<?> getAllTaskByStatus(@PathVariable("status") Status status) {
         List<Task> tasks = service.getTaskByStatus(status);
+        if (tasks.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
         return new ResponseEntity<>(tasks, HttpStatus.OK);
     }
 
     /**
      * Обработка POST-запроса. Создание новой задачи.
+     * добавление данных происходит через параметры запроса
      * пример запроса: http://localhost:8080/tasks/new?description=Buy bear
      * @param description - описание задачи
      * @return статус запроса и задача в формате JSON
@@ -73,15 +77,15 @@ public class TaskController {
     /**
      * Обработка PUT-запроса. Обновление данных указанной задачи.
      * Пример запроса: http://localhost:8080/tasks/{id}
-     * Параметры запроса: формат JSON, {"status": "DONE"}
+     * Тело запроса должно быть следующего виде(формат JSON): ["DONE"]
      * @param id - идентификатор задачи
      * @param status - обновляемый статус
      * @return статус запроса
      */
-    @PutMapping("/save/{id}")
-    public ResponseEntity<?> updateTaskStatus(@PathVariable Long id, @RequestBody Status[] status) {
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateTaskStatus(@PathVariable("id") Long id, @RequestBody Status[] status) {
         if (service.updateTaskStatus(id, status[0])) {
-            return new ResponseEntity<>(HttpStatus.CREATED);
+            return new ResponseEntity<>(HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
