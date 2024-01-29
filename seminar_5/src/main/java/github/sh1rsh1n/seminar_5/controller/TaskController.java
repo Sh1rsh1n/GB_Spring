@@ -66,7 +66,6 @@ public class TaskController {
     @PostMapping("/new")
     public ResponseEntity<?> addTask(@RequestParam String description) {
         Task task = new Task();
-        System.out.println(description);
         task.setDescription(description);
         if (service.createTask(task)){
             return new ResponseEntity<>(task, HttpStatus.CREATED);
