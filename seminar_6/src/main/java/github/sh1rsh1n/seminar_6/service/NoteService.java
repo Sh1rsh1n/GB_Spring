@@ -12,7 +12,7 @@ public interface NoteService {
 
     Note addNote(Note note);
 
-    void updateNote(Long id, Note note);
+    boolean updateNote(Note note);
 
-    void deleteNote(Long id);
+    boolean deleteNote(Long id);
 }

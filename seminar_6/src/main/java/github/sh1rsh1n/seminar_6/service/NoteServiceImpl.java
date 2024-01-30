@@ -26,11 +26,12 @@ public class NoteServiceImpl implements NoteService {
     }
 
     @Override
-    public void deleteNote(Long id) {
+    public boolean deleteNote(Long id) {
         if (repository.existsById(id)) {
             repository.deleteById(id);
+            return true;
         }
-        throw new NoteNotFountException();
+        return false;
     }
 
     @Override
@@ -48,11 +49,15 @@ public class NoteServiceImpl implements NoteService {
     }
 
     @Override
-    public void updateNote(Long id, Note note) {
-        Note updatedNote = getById(id);
-        updatedNote.setTitle(note.getTitle());
-        updatedNote.setDescription(note.getDescription());
-        updatedNote.setChangesAt(LocalDateTime.now());
-        repository.save(updatedNote);
+    public boolean updateNote(Note note) {
+        Note updatedNote = getById(note.getId());
+        if (updatedNote != null) {
+            updatedNote.setTitle(note.getTitle());
+            updatedNote.setDescription(note.getDescription());
+            updatedNote.setChangesAt(LocalDateTime.now());
+            repository.save(updatedNote);
+            return true;
+        }
+        return false;
     }
 }
