@@ -8,6 +8,7 @@ services:
   app:
     build:
       context: .
+      dockerfile: Dockerfile
     networks:
       - app-network
     depends_on:
@@ -16,11 +17,10 @@ services:
       - 8080:8080
 
   postgres:
-    image: postgres:14.0-alpine
-    container_name: postgres_db
-    networks:
-      - app-network
+    image: postgres:14.3-alpha
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=1234qwer
-      - POSTGRES_DB=private
+      POSTGRES_DB: "provate"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "1234qwer"
+    ports:
+      - "5432:5432"

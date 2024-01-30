@@ -45,6 +45,7 @@ public class NoteController {
         if (note == null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
+        noteService.addNote(note);
         return new ResponseEntity<>(note, HttpStatus.CREATED);
     }
 
