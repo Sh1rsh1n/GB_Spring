@@ -1,65 +1,41 @@
-import './App.css';
-import axios from 'axios';
-import React, { useState, useEffect } from 'react';
-import FormNewNote from './components/FormNewNote';
-import NoteTableView from './components/NoteTableView';
-
-const BASE_URL = 'http://localhost:8080/api/notes';
+import React from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import {Link, Route, Routes} from "react-router-dom";
+import NoteList from "./components/NoteList";
+import AddNote from "./components/AddNote";
+import Note from "./components/Note";
 
 const App = () => {
+    return (
+        <div>
+            <nav className="navbar navbar-expand navbar-light bg-light">
+                <a href="/" className="navbar-brand">
+                    МОИ ЗАМЕТКИ
+                </a>
+                <div className="navbar-nav mr-auto">
+                    <li className="nav-item">
+                        <Link to={"/notes"} className="nav-link">
+                            Все заметки
+                        </Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link to={"/add"} className="nav-link">
+                            Добавить заметку
+                        </Link>
+                    </li>
+                </div>
+            </nav>
 
-  const [notes, setNotes] = useState([]);
-  useEffect(() => {
-    axios.get(BASE_URL)
-       .then(res => {
-        const data = [];
-
-        res.data._embedded.notes.forEach(item => {
-          data.push(
-            {
-              id: item.id,
-              title: item.title,
-              description: item.description,
-            }
-          )
-        })
-        setNotes(data);
-      })
-  }, []);
-
-  const appendNote = (title, description) => {
-
-    const temp = {
-      // id: currentId,
-      title: title,
-      description: description,
-    };
-
-    axios.post(BASE_URL, temp)
-    .then(e => {
-      temp.id = e.data.id;
-      setNotes([...notes, temp]);
-    });
-  }
-
-  const removeNote = (id) => {
-    axios.get(BASE_URL + '/delete/{id}');
-    setNotes(notes.filter(note => note.id !== id));
-  }
-
-  return (
-    <div className='container mt-5'>
-      <div className='card'>
-        <div className='card-header'>
-          <h1>Note List</h1>
+            <div className="container mt-3">
+                <Routes>
+                    <Route path="/" element={<NoteList/>} />
+                    <Route path="/notes" element={<NoteList/>} />
+                    <Route path="/add" element={<AddNote/>} />
+                    <Route path="/notes/:id" element={<Note/>} />
+                </Routes>
+            </div>
         </div>
-        <div className='card-body'>
-          <NoteTableView data={notes} removeNote={removeNote} />
-          <FormNewNote appendNote={appendNote} />
-        </div>
-      </div>
-    </div>
-  );
+    );
 }
 
 export default App;

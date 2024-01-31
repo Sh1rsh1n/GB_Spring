@@ -1,6 +1,20 @@
 version: "3.8"
 
 services:
+
+  client-frontend:
+    build: ./frontend
+    restart: always
+    ports:
+      - 3000:3000
+    volumes:
+      - /app/node_modules
+      - ./frontend:/app
+    depends_on:
+      - app
+      - postgresdb
+
+
   postgresdb:
     image: postgres:14-alpine
     restart: unless-stopped
@@ -11,6 +25,9 @@ services:
       - POSTGRES_DB=notes
     ports:
       - 5432:5432
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
   app:
     depends_on:
       - postgresdb
@@ -18,11 +35,6 @@ services:
     env_file: ./.env
     ports:
       - 8080:8080
-    # environment:
-    #   SPRING_APPLICATION_JSON: '{
-    #     "spring.datasource.url"  : "jdbc:postgresql://postgresdb:5432/notes",
-    #     "spring.datasource.username" : "pgadmin",
-    #     "spring.datasource.password" : "1234qwer",
-    #     "spring.jpa.properties.hibernate.dialect" : "org.hibernate.dialect.PostgreSQLDialect",
-    #     "spring.jpa.hibernate.ddl-auto" : "update"
-    #   }'
+
+volumes:
+  db-data:
