@@ -20,6 +20,7 @@ public class NoteServiceImpl implements NoteService {
     @Override
     public Note addNote(Note note) {
         if (note != null) {
+            note.setChangesAt(LocalDateTime.now());
             return repository.save(note);
         }
         throw new NoteNotFountException();
