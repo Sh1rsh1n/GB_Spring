@@ -6,23 +6,23 @@ services:
     restart: unless-stopped
     env_file: ./.env
     environment:
-      - POSTGRES_USER=$POSTGRESDB_USER
-      - POSTGRES_PASSWORD=$POSTGRESDB_ROOT_PASSWORD
-      - POSTGRES_DB=$POSTGRESDB_DATABASE
+      - POSTGRES_USER=pgadmin
+      - POSTGRES_PASSWORD=1234qwer
+      - POSTGRES_DB=notes
     ports:
-      - $POSTGRESDB_LOCAL_PORT:$POSTGRESDB_DOCKER_PORT
+      - 5432:5432
   app:
     depends_on:
       - postgresdb
     build: .
     env_file: ./.env
     ports:
-      - $SPRING_LOCAL_PORT:$SPRING_DOCKER_PORT
-    environment:
-      SPRING_APPLICATION_JSON: '{
-        "spring.datasource.url"  : "jdbc:postgresql://postgresdb:$POSTGRESDB_DOCKER_PORT/$POSTGRESDB_DATABASE",
-        "spring.datasource.username" : "$POSTGRESDB_USER",
-        "spring.datasource.password" : "$POSTGRESDB_ROOT_PASSWORD",
-        "spring.jpa.properties.hibernate.dialect" : "org.hibernate.dialect.PostgreSQLDialect",
-        "spring.jpa.hibernate.ddl-auto" : "update"
-      }'
+      - 8080:8080
+    # environment:
+    #   SPRING_APPLICATION_JSON: '{
+    #     "spring.datasource.url"  : "jdbc:postgresql://postgresdb:5432/notes",
+    #     "spring.datasource.username" : "pgadmin",
+    #     "spring.datasource.password" : "1234qwer",
+    #     "spring.jpa.properties.hibernate.dialect" : "org.hibernate.dialect.PostgreSQLDialect",
+    #     "spring.jpa.hibernate.ddl-auto" : "update"
+    #   }'

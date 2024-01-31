@@ -49,7 +49,7 @@ public class NoteController {
         return new ResponseEntity<>(note, HttpStatus.CREATED);
     }
 
-    @PutMapping("/save/")
+    @PutMapping("/save")
     public ResponseEntity<?> updateNote(@RequestBody Note note) {
         if (noteService.updateNote(note)) {
             return new ResponseEntity<>(note, HttpStatus.OK);
