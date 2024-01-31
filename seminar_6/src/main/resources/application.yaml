@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/private?currentSchema=NOTE_DB
-    username: postgres
-    password: 1234qwer
+    url: jdbc:postgresql://postgresdb/private
+    username: pgadmin
+    password: qwerasdf
     driver-class-name: org.postgresql.Driver
   jpa:
     properties:
