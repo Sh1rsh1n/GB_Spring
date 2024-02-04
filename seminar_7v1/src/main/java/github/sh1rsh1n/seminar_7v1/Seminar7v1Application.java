@@ -1,7 +1,7 @@
-package github.sh1rsh1n.seminar_7;
+package github.sh1rsh1n.seminar_7v1;
 
-import github.sh1rsh1n.seminar_7.entity.User;
-import github.sh1rsh1n.seminar_7.repository.UserRepository;
+import github.sh1rsh1n.seminar_7v1.entity.User;
+import github.sh1rsh1n.seminar_7v1.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -10,7 +10,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 
 @SpringBootApplication
 @RequiredArgsConstructor
-public class Seminar7Application implements CommandLineRunner {
+public class Seminar7v1Application implements CommandLineRunner {
 
     private final UserRepository userRepository;
 
