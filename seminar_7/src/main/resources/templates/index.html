@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Main Page</title>
@@ -8,14 +10,22 @@
 <h1>Main Page</h1>
 <br>
 <br>
-<a class="link-primary" th:href="@{/login}">Login page</a>
+<div sec:authorize="!isAuthenticated()">
+    <a class="link-primary" th:href="@{/login}">Login page</a>
+</div>
 <br>
 <br>
-<a class="link-primary" th:href="@{/public}">Users page</a>
+<div sec:authorize="hasAnyAuthority('USER', 'ADMIN')">
+    <a class="link-primary" th:href="@{/public}">Users page</a>
+</div>
 <br>
 <br>
-<a class="link-primary" th:href="@{/private}">Admins page</a>
+<div sec:authorize="hasAuthority('ADMIN')">
+    <a class="link-primary" th:href="@{/private}">Admins page</a>
+</div>
 <br>
-<a class="link-primary" th:href="@{/logout}">logout</a>
+<div sec:authorize="isAuthenticated()">
+    <a class="link-primary" th:href="@{/logout}">logout</a>
+</div>
 </body>
 </html>
