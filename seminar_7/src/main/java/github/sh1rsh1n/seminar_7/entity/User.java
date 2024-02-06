@@ -1,22 +1,16 @@
 package github.sh1rsh1n.seminar_7.entity;
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.HashSet;
-import java.util.Set;
-
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "users",
-        uniqueConstraints = {
-                @UniqueConstraint(columnNames = "username"),
-                @UniqueConstraint(columnNames = "email")
-        })
+@Table(name = "users")
 public class User {
 
     @Id
@@ -35,6 +29,8 @@ public class User {
     private String password;
 
     @Column(nullable = false)
+    @Enumerated(value = EnumType.STRING)
+    @JsonProperty(value = "role")
     private Role role;
 
 

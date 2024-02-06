@@ -1,11 +1,12 @@
 package github.sh1rsh1n.seminar_7.controller;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+/**
+ * Обработка обращений клиентов к серверу
+ */
 @Controller
-@RequiredArgsConstructor
 public class AppController {
 
     @GetMapping("/public")
