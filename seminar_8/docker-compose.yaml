@@ -1,0 +1,40 @@
+version: "3.8"
+
+services:
+
+  client-frontend:
+    build: ./frontend
+    restart: always
+    ports:
+      - 3000:3000
+    volumes:
+      - /app/node_modules
+      - ./frontend:/app
+    depends_on:
+      - app
+      - postgresdb
+
+
+  postgresdb:
+    image: postgres:14-alpine
+    restart: unless-stopped
+    env_file: ./.env
+    environment:
+      - POSTGRES_USER=pgadmin
+      - POSTGRES_PASSWORD=1234qwer
+      - POSTGRES_DB=notes
+    ports:
+      - 5432:5432
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+  app:
+    depends_on:
+      - postgresdb
+    build: .
+    env_file: ./.env
+    ports:
+      - 8080:8080
+
+volumes:
+  db-data:
