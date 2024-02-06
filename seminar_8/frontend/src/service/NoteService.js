@@ -9,7 +9,7 @@ const get = id => {
 };
 
 const create = data => {
-    return http.post("/notes", data);
+    return http.post("/notes/new", data);
 };
 
 const update = (data) => {
