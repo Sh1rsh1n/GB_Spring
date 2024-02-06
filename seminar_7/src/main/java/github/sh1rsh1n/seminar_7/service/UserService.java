@@ -13,9 +13,13 @@ import java.util.Optional;
 
 import static org.springframework.security.core.userdetails.User.withUsername;
 
+/**
+ * UserService реализация интерфейса UserDetailsService
+ * Так же можно добавить методы для работы с сущностью User в БД
+ */
 @Service
 @RequiredArgsConstructor
-public class UserDetailsServiceImpl implements UserDetailsService {
+public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
 
