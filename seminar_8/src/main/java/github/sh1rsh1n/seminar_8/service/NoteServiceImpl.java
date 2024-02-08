@@ -12,12 +12,20 @@ import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Сервис обработка запросов из контроллера
+ */
 @Service
 @RequiredArgsConstructor
 public class NoteServiceImpl implements NoteService {
 
     private final NoteRepository repository;
 
+    /**
+     * Добавление заметки
+     * @param note
+     * @return
+     */
     @Override
     public Note addNote(Note note) {
         if (note != null) {
@@ -27,6 +35,11 @@ public class NoteServiceImpl implements NoteService {
         throw new NoteNotFountException();
     }
 
+    /**
+     * Удаление заметки
+     * @param id
+     * @return
+     */
     @Override
     public boolean deleteNote(Long id) {
         if (repository.existsById(id)) {
@@ -36,6 +49,10 @@ public class NoteServiceImpl implements NoteService {
         return false;
     }
 
+    /**
+     * Получение списка всех заметок
+     * @return
+     */
     @TrackUserAction
     @Override
     public List<Note> getAll() {
@@ -46,12 +63,22 @@ public class NoteServiceImpl implements NoteService {
         return notes;
     }
 
+    /**
+     * Получение заметки по ID
+     * @param id
+     * @return
+     */
     @TrackUserAction
     @Override
     public Note getById(Long id) {
         return repository.findById(id).orElse(null);
     }
 
+    /**
+     * Изменение данных заметки
+     * @param note
+     * @return
+     */
     @Override
     public boolean updateNote(Note note) {
         Note updatedNote = getById(note.getId());

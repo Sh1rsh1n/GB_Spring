@@ -5,6 +5,9 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
+/**
+ * Класс, описание сущности "Заметка"
+ */
 @Data
 @Entity
 @Table(name = "notes")

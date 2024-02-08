@@ -17,6 +17,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Обработка REST запросов по адресу "http://localhost:8080/api/notes"
+ * Для разрешения взаимодействия с внешним интерфейсом(REACT) используется аннотация @CrossOrigin
+ */
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api/notes")
@@ -25,12 +29,23 @@ public class NoteController {
 
     private final NoteService noteService;
 
+    /**
+     * Получение списка всех заметок
+     * Обработка запросов по адресу [GET]http://localhost:8080/api/notes
+     * @return
+     */
     @GetMapping
     public ResponseEntity<?> getAllNotes() {
         List<Note> notes = noteService.getAll();
         return new ResponseEntity<>(notes, HttpStatus.OK);
     }
 
+    /**
+     * Получение заметки по ID
+     * Обработка запросов по адресу [GET]http://localhost:8080/api/notes/{id}
+     * @param id
+     * @return
+     */
     @GetMapping("/{id}")
     public ResponseEntity<?> getNote(@PathVariable Long id) {
         Note note = noteService.getById(id);
@@ -40,6 +55,12 @@ public class NoteController {
         return new ResponseEntity<>(note, HttpStatus.NOT_FOUND);
     }
 
+    /**
+     * Создание новой заметки
+     * Обработка запроса по адресу [POST]http://localhost:8080/api/notes/new
+     * @param note
+     * @return
+     */
     @PostMapping("/new")
     public ResponseEntity<?> addNote(@RequestBody Note note) {
         if (note == null) {
@@ -49,6 +70,12 @@ public class NoteController {
         return new ResponseEntity<>(note, HttpStatus.CREATED);
     }
 
+    /**
+     * Изменение заметки
+     * Обработка запроса по адресу [PUT]http://localhost:8080/api/notes/save
+     * @param note
+     * @return
+     */
     @PutMapping("/save")
     public ResponseEntity<?> updateNote(@RequestBody Note note) {
         if (noteService.updateNote(note)) {
@@ -57,6 +84,12 @@ public class NoteController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
+    /**
+     * Удаление заметки
+     * Обработка запроса по адресу [GET]http://localhost:8080/api/notes/delete/{id}
+     * @param id
+     * @return
+     */
     @GetMapping("/delete/{id}")
     public ResponseEntity<?> deleteNote(@PathVariable("id") Long id) {
         if (noteService.deleteNote(id)) {
