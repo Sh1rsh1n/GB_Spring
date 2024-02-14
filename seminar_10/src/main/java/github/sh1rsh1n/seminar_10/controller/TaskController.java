@@ -1,4 +1,4 @@
-package github.sh1rsh1n.seminar_5.controller;
+package github.sh1rsh1n.seminar_10.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-import github.sh1rsh1n.seminar_5.service.TaskService;
-import github.sh1rsh1n.seminar_5.entity.*;
+import github.sh1rsh1n.seminar_10.service.TaskService;
+import github.sh1rsh1n.seminar_10.entity.*;
 import lombok.RequiredArgsConstructor;
 
 /**

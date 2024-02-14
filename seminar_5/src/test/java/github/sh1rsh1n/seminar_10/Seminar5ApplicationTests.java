@@ -1,4 +1,4 @@
-package github.sh1rsh1n.seminar_5;
+package github.sh1rsh1n.seminar_10;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
