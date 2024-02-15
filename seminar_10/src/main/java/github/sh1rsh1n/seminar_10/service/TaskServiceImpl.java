@@ -28,7 +28,7 @@ public class TaskServiceImpl implements TaskService {
      */
     @Override
     public boolean createTask(Task task) {
-        if (task != null || task.getDescription() != null) {
+        if (task != null && task.getDescription() != null) {
             LocalDateTime date = LocalDateTime.now();
             task.setCreateAt(date);
             task.setChangesAt(date);
