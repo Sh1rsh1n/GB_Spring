@@ -7,11 +7,14 @@ import github.sh1rsh1n.seminar_10.repository.TaskRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.BDDMockito;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -23,7 +26,7 @@ import static org.mockito.BDDMockito.*;
 import static org.mockito.Mockito.when;
 
 /**
- * Тесты сервис слоя приложения
+ * Тестирование для сервис-слоя приложения
  */
 @ExtendWith(MockitoExtension.class)
 class TaskServiceImplTest {
@@ -45,7 +48,8 @@ class TaskServiceImplTest {
     }
 
     /**
-     * Тест метода создания заметки, успешный результат добавления
+     * Тест метода создания новой задачи
+     * Успешно выполнение
      */
     @Test
     void createTaskTest_WillReturn_True() {
@@ -59,6 +63,10 @@ class TaskServiceImplTest {
         assertTrue(checkIsSaveTask);
     }
 
+    /**
+     * Тест метода создания новой задачи
+     * Неуспешное выполнение
+     */
     @Test
     void createTaskTest_WillReturn_False() {
         var newTask = new Task();
@@ -68,6 +76,9 @@ class TaskServiceImplTest {
         assertFalse(checkIsSaveTask);
     }
 
+    /**
+     * Успешный тест метода удаления задачи
+     */
     @Test
     void deleteTaskTest_isGood() {
 
@@ -78,9 +89,12 @@ class TaskServiceImplTest {
         verify(taskRepository).deleteById(anyLong());
     }
 
+    /**
+     * Тест метода удаления задачи, проверка на исключение TaskNotFoundException
+     */
     @Test
     void deleteTaskTest_ThrowException() {
-        given(taskRepository.findById(Mockito.anyLong())).willReturn(Optional.empty());
+        given(taskRepository.findById(anyLong())).willReturn(Optional.empty());
 
         assertThrows(TaskNotFoundException.class,
                 () -> taskService.deleteTask(anyLong()));
@@ -88,6 +102,10 @@ class TaskServiceImplTest {
         verify(taskRepository, never()).deleteById(anyLong());
     }
 
+    /**
+     * Тест метода получения списка задач
+     * Успешный результат, должен вернутся список задач
+     */
     @Test
     void getAllTaskTest_ReturnCollectionTasks() {
         given(taskRepository.findAll()).willReturn(tasks);
@@ -97,6 +115,10 @@ class TaskServiceImplTest {
         assertEquals(tasks.size(), tasksList.size());
     }
 
+    /**
+     * Тест метода получения списка задач
+     * Успешный результат, должен вернутся пустой список
+     */
     @Test
     void getAllTaskTest_ReturnEmptyCollection() {
         given(taskRepository.findAll()).willReturn(Collections.emptyList());
@@ -106,6 +128,10 @@ class TaskServiceImplTest {
         assertEquals(0, tasksList.size());
     }
 
+    /**
+     * Тест метода получение задачи по ID
+     * Успешный результат, ожидается возврат объекта Task
+     */
     @Test
     void getTaskByIdTest_WillReturnTask() {
         Task task = Task.builder()
@@ -118,6 +144,10 @@ class TaskServiceImplTest {
         assertEquals(expectedTask, task);
     }
 
+    /**
+     * Тест метода получение задачи по ID
+     * Проверка на исключение
+     */
     @Test
     void getTaskByIdTest_ThrowException() {
 
@@ -127,6 +157,10 @@ class TaskServiceImplTest {
                 () -> taskService.getTaskById(anyLong()));
     }
 
+    /**
+     * Тест метода получения списка задач по статусу
+     * Успешный результат, должен вернутся список задач отфильтрованный по статусу
+     */
     @Test
     void getTaskByStatusTest() {
         given(taskRepository.findAll()).willReturn(tasks);
@@ -136,9 +170,14 @@ class TaskServiceImplTest {
 
         var tasksList = taskService.getTaskByStatus(Status.TODO);
 
-        assertEquals(1,  tasksList.size());
+        assertEquals(1, tasksList.size());
     }
 
+    /**
+     * Тест метода изменение статусу задачи
+     * Успешный результат, должен вернутся значение true
+     * Выполняется проверка текущего статуса с ожидаемым
+     */
     @Test
     void updateTaskStatusTest_WillReturnUpdatedTask() {
 
@@ -152,6 +191,10 @@ class TaskServiceImplTest {
         assertTrue(expected);
     }
 
+    /**
+     * Тест метода изменение статусу задачи
+     * Проверка на исключение
+     */
     @Test
     void updateTaskStatusTest_ThrowException() {
 
