@@ -48,6 +48,7 @@ class TaskControllerTest {
                 );
     }
 
+    @Sql("/trancate.sql")
     @Test
     void getAllTaskTest_isNoContent() throws Exception {
         var requestBuilder = get("/tasks");
@@ -74,13 +75,5 @@ class TaskControllerTest {
                 .andExpectAll(
                         status().isNoContent()
                 );
-    }
-
-    @Test
-    void addTask() {
-    }
-
-    @Test
-    void updateTaskStatus() {
     }
 }
