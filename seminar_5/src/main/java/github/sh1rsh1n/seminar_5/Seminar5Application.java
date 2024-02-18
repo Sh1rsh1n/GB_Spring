@@ -1,4 +1,4 @@
-package github.sh1rsh1n.seminar_10;
+package github.sh1rsh1n.seminar_5;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

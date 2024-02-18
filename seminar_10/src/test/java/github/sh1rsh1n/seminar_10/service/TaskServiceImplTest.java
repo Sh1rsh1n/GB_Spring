@@ -7,14 +7,11 @@ import github.sh1rsh1n.seminar_10.repository.TaskRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.BDDMockito;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -25,6 +22,9 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.*;
 import static org.mockito.Mockito.when;
 
+/**
+ * Тесты сервис слоя приложения
+ */
 @ExtendWith(MockitoExtension.class)
 class TaskServiceImplTest {
 
@@ -44,6 +44,9 @@ class TaskServiceImplTest {
         tasks = List.of(task1, task2);
     }
 
+    /**
+     * Тест метода создания заметки, успешный результат добавления
+     */
     @Test
     void createTaskTest_WillReturn_True() {
         var newTask = Task.builder().id(1L).description("Task #001").status(Status.TODO).build();

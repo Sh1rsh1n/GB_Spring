@@ -1,4 +1,4 @@
-package github.sh1rsh1n.seminar_10.entity;
+package github.sh1rsh1n.seminar_11.entity;
 
 public enum Status {
     TODO, IN_PROGRESS, DONE

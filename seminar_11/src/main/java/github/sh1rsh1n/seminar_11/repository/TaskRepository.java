@@ -1,4 +1,4 @@
-package github.sh1rsh1n.seminar_10.repository;
+package github.sh1rsh1n.seminar_11.repository;
 
 import java.util.List;
 
