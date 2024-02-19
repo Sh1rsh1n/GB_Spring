@@ -1,0 +1,25 @@
+version: '3.8'
+services:
+
+  tasks:
+    build: .
+    ports:
+      - 8080:8080
+
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus_test
+    volumes:
+      - ./config/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - 9090:9090
+    depends_on:
+      - tasks
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana_test
+    ports:
+      - 3000:3000
+    depends_on:
+      - prometheus

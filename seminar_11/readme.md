@@ -1,21 +1,34 @@
-# Базовое задание:
-### Условия:
-- Вам предстоит создать приложение для управления списком задач с использованием Spring Boot и Spring Data JPA. Требуется реализовать следующие функции:
-- Добавление задачи. Подсказка метод в контроллере: @PostMapping public Task addTask(@RequestBody Task task)
-- Просмотр всех задач. Подсказка метод в контроллере: @GetMapping public List<Task> getAllTasks()
-- Просмотр задач по статусу (например, "завершена", "в процессе", "не начата"). Подсказка метод в контроллере: @GetMapping("/status/{status}") public List<Task> getTasksByStatus(@PathVariable TaskStatus status)
-- Изменение статуса задачи. Подсказка метод в контроллере: @PutMapping("/{id}") public Task updateTaskStatus(@PathVariable Long id, @RequestBody Task task)
-- Удаление задачи.
-Подсказка метод в контроллере:
-@DeleteMapping("/{id}")
-public void deleteTask(@PathVariable Long id)
-Репозитроий подсказка public interface TaskRepository extends JpaRepository<Task, Long>
-Структура задачи(класс Task):
-- ID (автоинкрементное)(тип Long)
-- Описание (не может быть пустым)(тип String)
-- Статус (одно из значений: "не начата", "в процессе", "завершена")(Тип TaskStatus )
-- Дата создания (автоматически устанавливается при создании задачи)(Тип LocalDateTime)
-Подсказка понадобится энумератор:
-enum TaskStatus {
-NOT_STARTED, IN_PROGRESS, COMPLETED;
-}
+## Условия задание:
+
+По примерам показанным на семинаре:
+
+1) Подключить к своему проекту зависимости actuator, registry-prometheus и micrometer.
+2) Установить и подключить к проекту prometheus
+3) Установить и подключить Grafana. В Grafana добавить пару точек контроля (Например: процессное время приложения и
+   количество запросов)
+
+### Формат сдачи:
+
+- **_проект с добавленными зависимостями_**
+
+![pom.xml](images/pom.png)
+
+- **_файл настройки prometheus_**
+
+![prometheus.yml](images/prometheus_1.png)
+
+**Примечание:** _Так как все взаимодействие идет внутри docker-a, то и настройку **target (tasks:8080)**, нужно писать
+ссылку на контейнер, а не **localhost:8080**_
+
+![prometheus-web](images/prometheus_2.png)
+
+- **_скриншот Grafana с добавленными контрольными точками._**
+
+![grafana-config](images/grafana_1.png)
+
+**Примечание:** Настройку **Connection**, также прописываем название контейнера:порт **(http://prometheus:9090)**
+
+![grafana-config](images/grafana_2.png)
+
+
+

@@ -21,9 +21,7 @@ spring:
       path: /h2
 
 management:
-  endpoint:
-    health:
-      show-details: always
+  endpoints:
     web:
       exposure:
-        include: 'metrics,prometheus'
+        include: health,prometheus
