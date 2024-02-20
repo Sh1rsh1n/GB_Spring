@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 public class Seminar12Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SSeminar12Application.class, args);
+		SpringApplication.run(Seminar12Application.class, args);
 	}
 
 }

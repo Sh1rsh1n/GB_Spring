@@ -1,17 +1,16 @@
-package github.sh1rsh1n.seminar_5.service;
+package github.sh1rsh1n.seminar_12.service;
+
+import github.sh1rsh1n.seminar_12.entity.Status;
+import github.sh1rsh1n.seminar_12.entity.Task;
+import github.sh1rsh1n.seminar_12.exception.TaskNotFoundException;
+import github.sh1rsh1n.seminar_12.repository.TaskRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-
-import org.springframework.stereotype.Service;
-
-import github.sh1rsh1n.seminar_5.entity.Status;
-import github.sh1rsh1n.seminar_5.entity.Task;
-import github.sh1rsh1n.seminar_5.repository.TaskRepository;
-import github.sh1rsh1n.seminar_5.exception.TaskNotFoundException;
-import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
